@@ -8,7 +8,8 @@
     android:layout_marginEnd="16dp"
     android:layout_marginBottom="8dp"
     app:cardCornerRadius="8dp"
-    app:cardElevation="2dp">
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="#B9A6E8">  <!-- Light Purple (30%) -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +23,8 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginEnd="16dp"
-            android:src="@android:drawable/ic_dialog_info" />
+            android:src="@android:drawable/ic_dialog_info"
+            app:tint="#2E1A47" />
 
         <!-- Device Info -->
         <LinearLayout
@@ -46,8 +48,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:text="192.168.1.1"
-                android:textColor="#2196F3"
-                android:textSize="14sp" />
+                android:textColor="#2E1A47"
+            android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/deviceMac"
@@ -55,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:text="00:1A:2B:3C:4D:5E"
-                android:textColor="#666666"
+                android:textColor="#333333"
                 android:textSize="12sp" />
 
             <TextView
@@ -64,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:text="Unknown Vendor"
-                android:textColor="#666666"
+                android:textColor="#333333"
                 android:textSize="12sp"
                 android:textStyle="italic" />
         </LinearLayout>

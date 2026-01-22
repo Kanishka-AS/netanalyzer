@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="#A8E6CF" android:state_checked="true" />  <!-- Pastel Green (10%) -->
+    <item android:color="#2E1A47" android:state_checked="false" /> <!-- Dark Purple -->
+</selector>
