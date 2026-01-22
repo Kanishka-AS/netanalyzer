@@ -10,15 +10,22 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.Serializable;
@@ -42,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView statusTextView, deviceCountTextView;
     private MaterialButton scanButton;
     private ProgressBar progressBar;
+    private BottomNavigationView bottomNavigationView;
+    private FrameLayout fragmentContainer;
+    private View networkScannerContainer;
 
     // Data
     private List<Device> deviceList = new ArrayList<>();
@@ -66,24 +76,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Initialize all views
         initializeViews();
         setupRecyclerView();
         setupWiFiManager();
         checkAndRequestPermissions();
+        setupBottomNavigation();
     }
 
     private void initializeViews() {
+        // Find all views
         devicesRecyclerView = findViewById(R.id.devicesRecyclerView);
         statusTextView = findViewById(R.id.statusTextView);
         deviceCountTextView = findViewById(R.id.deviceCountTextView);
         scanButton = findViewById(R.id.scanButton);
         progressBar = findViewById(R.id.progressBar);
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        fragmentContainer = findViewById(R.id.fragment_container);
+        networkScannerContainer = findViewById(R.id.network_scanner_container);
 
-        // Pass context to adapter
-        deviceAdapter = new DeviceAdapter(this, deviceList);
-        devicesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        devicesRecyclerView.setAdapter(deviceAdapter);
-
+        // Setup scan button
         scanButton.setOnClickListener(v -> {
             if (checkAllPermissions()) {
                 startNetworkScan();
@@ -91,6 +103,11 @@ public class MainActivity extends AppCompatActivity {
                 requestNeededPermissions();
             }
         });
+
+        // Setup device adapter
+        deviceAdapter = new DeviceAdapter(this, deviceList);
+        devicesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        devicesRecyclerView.setAdapter(deviceAdapter);
     }
 
     private void setupRecyclerView() {
@@ -101,6 +118,66 @@ public class MainActivity extends AppCompatActivity {
         wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         if (wifiManager == null) {
             showToast("WiFi service not available");
+        }
+    }
+
+    private void setupBottomNavigation() {
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+
+            if (itemId == R.id.nav_network) {
+                // Show Network Scanner
+                showNetworkScanner();
+                return true;
+            } else if (itemId == R.id.nav_dns) {
+                // Show DNS Test Fragment
+                showDnsTestFragment();
+                return true;
+            } else if (itemId == R.id.nav_ping) {
+                // Open PingTestActivity
+                Intent intent = new Intent(MainActivity.this, PingTestActivity.class);
+                startActivity(intent);
+                return false; // Don't change selection
+            }
+
+            return false;
+        });
+    }
+
+    private void showNetworkScanner() {
+        // Hide any fragment
+        hideAllFragments();
+
+        // Show network scanner container
+        networkScannerContainer.setVisibility(View.VISIBLE);
+    }
+
+    private void showDnsTestFragment() {
+        // Hide network scanner
+        networkScannerContainer.setVisibility(View.GONE);
+
+        // Create or show DNS Test Fragment
+        Fragment dnsFragment = getSupportFragmentManager().findFragmentByTag("DNS_FRAGMENT");
+
+        if (dnsFragment == null) {
+            dnsFragment = new DnsTestFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.add(R.id.fragment_container, dnsFragment, "DNS_FRAGMENT");
+            transaction.commit();
+        } else {
+            // Show existing fragment
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.show(dnsFragment);
+            transaction.commit();
+        }
+    }
+
+    private void hideAllFragments() {
+        Fragment dnsFragment = getSupportFragmentManager().findFragmentByTag("DNS_FRAGMENT");
+        if (dnsFragment != null) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.hide(dnsFragment);
+            transaction.commit();
         }
     }
 

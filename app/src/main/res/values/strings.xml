@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">NetAnalyzer</string>
+    <string name="quick_test_4_pings">Quick Test (4 pings)</string>
+    <string name="detailed_test_10_pings">Detailed Test (10 pings)</string>
+    <string name="quick_test_servers">Quick Test Servers</string>
+    <string name="google">Google</string>
+    <string name="cloudflare">Cloudflare</string>
+    <string name="router">Router</string>
+    <string name="test_results">📊 Test Results</string>
+    <string name="ready_to_test">Ready to test...</string>
+    <string name="click_a_button_to_start_ping_test">Click a button to start ping test</string>
+    <string name="enter_host_or_ip_address">Enter Host or IP Address</string>
+    <string name="e_g_8_8_8_8_or_google_com">e.g., 8.8.8.8 or google.com</string>
+    <string name="_8_8_8_8">8.8.8.8</string>
+    <string name="ping_history">📋 Ping History</string>
 </resources>

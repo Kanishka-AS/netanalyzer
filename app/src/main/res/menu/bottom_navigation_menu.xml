@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_network"
+        android:icon="@android:drawable/ic_menu_manage"
+        android:title="Network" />
+
+    <item
+        android:id="@+id/nav_dns"
+        android:icon="@android:drawable/ic_dialog_info"
+        android:title="DNS Test" />
+
+    <item
+        android:id="@+id/nav_ping"
+        android:icon="@android:drawable/ic_menu_compass"
+        android:title="Ping Tools" />
+
+    <!-- Remove the Settings tab since you're not using it -->
+    <!-- <item
+        android:id="@+id/nav_settings"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="Settings" /> -->
+</menu>

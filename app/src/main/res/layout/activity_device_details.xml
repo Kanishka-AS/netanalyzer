@@ -401,27 +401,49 @@
                     android:textStyle="bold"
                     android:layout_marginBottom="12dp" />
 
-                <!-- Add this ProgressBar -->
+                <!-- Progress Indicator -->
                 <ProgressBar
                     android:id="@+id/pingProgress"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginVertical="8dp"
-                    android:indeterminateTint="#2196F3"
-                    android:visibility="gone" />
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:visibility="gone"
+                    android:progressTint="#2196F3"
+                    android:layout_marginBottom="8dp" />
 
+                <!-- Progress Text -->
+                <TextView
+                    android:id="@+id/pingProgressText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#666666"
+                    android:textSize="12sp"
+                    android:visibility="gone"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- Result Display -->
                 <TextView
                     android:id="@+id/pingResult"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Tap to test connectivity"
+                    android:text="Tap to test ping (tap &amp; hold for advanced test)"
                     android:textColor="#666666"
                     android:textSize="14sp"
                     android:gravity="center"
                     android:padding="12dp"
                     android:background="#E3F2FD"
                     android:layout_marginTop="8dp" />
+
+                <!-- Quick Instructions -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="💡 Quick test: Tap | Advanced: Tap &amp; hold"
+                    android:textColor="#999999"
+                    android:textSize="11sp"
+                    android:gravity="center"
+                    android:layout_marginTop="4dp" />
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -461,6 +483,20 @@
                     android:padding="12dp"
                     android:background="#FFF3E0"
                     android:layout_marginTop="8dp" />
+
+                <!-- Coming Soon Badge -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="COMING SOON"
+                    android:textColor="#FFFFFF"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:background="#FF9800"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="2dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="4dp" />
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
